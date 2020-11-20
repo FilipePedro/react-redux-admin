@@ -11,15 +11,17 @@ import {
 } from '@material-ui/core';
 
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 // common imports
 import TextInput from './TextInput';
-import { getValidation } from '../../utils/validations';
+import SelectInput from './SelectInput';
 import ButtonArea from './ButtonArea';
-// import { genderOptions } from '../../utils/utils';
+import CountryAutocomplete from './CountryAutocomplete';
+import { getValidation } from '../../utils/validations';
+import { genderOptions } from '../../utils/utils';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -60,7 +62,6 @@ const CustomForm: React.FC<FormProps> = (props) => {
   const { isDirty } = formState;
 
   useEffect(() => {
-    console.log('form rendered...')
     // register form dynamically validations
     for (const f of fields) {
       if (f === 'remember') return;
@@ -82,6 +83,23 @@ const CustomForm: React.FC<FormProps> = (props) => {
         {
           fields.map((f: string, i: number) => {
             switch (f) {
+              case 'fullName':
+                return (
+                  <Grid item xs={12} key={i}>
+                    <Controller
+                      name="fullName"
+                      control={control}
+                      render={({ ref, ...otherProps }) => (
+                        <TextInput
+                          {...otherProps}
+                          label='Full Name'
+                          autoFocus={fields[0] === 'fullName'}
+                          required
+                          errors={errors?.fullName} />
+                      )}
+                    />
+                  </Grid>
+                )
               case 'email':
                 return (
                   <Grid item xs={12} key={i}>
@@ -95,7 +113,7 @@ const CustomForm: React.FC<FormProps> = (props) => {
                           label='Email Address'
                           margin='normal'
                           autoComplete="email"
-                          autoFocus
+                          autoFocus={fields[0] === 'email'}
                           errors={errors?.email} />
                       )}
                     />
@@ -126,6 +144,57 @@ const CustomForm: React.FC<FormProps> = (props) => {
                               </IconButton>
                             </InputAdornment>,
                           }}
+                        />
+                      )}
+                    />
+                  </Grid>
+                )
+              case 'gender':
+                return (
+                  <Grid item xs={12} md={3} key={i}>
+                    <Controller
+                      name="gender"
+                      control={control}
+                      render={({ ref, ...otherProps }) => (
+                        <SelectInput
+                          {...otherProps}
+                          options={genderOptions}
+                          required
+                          errors={errors?.gender}
+                        />
+                      )}
+                    />
+                  </Grid>
+                )
+              case 'age':
+                return (
+                  <Grid item xs={12} md={3} key={i}>
+                    <Controller
+                      name="age"
+                      control={control}
+                      render={({ ref, ...otherProps }) => (
+                        <TextInput
+                          {...otherProps}
+                          label='Age'
+                          required
+                          type="number"
+                          errors={errors?.age}
+                        />
+                      )}
+                    />
+                  </Grid>
+                )
+              case 'country':
+                return (
+                  <Grid item xs={12} md={6} key={i}>
+                    <Controller
+                      name="country"
+                      control={control}
+                      render={({ ref, ...otherProps }) => (
+                        <CountryAutocomplete
+                          {...otherProps}
+                          required
+                          errors={errors?.country}
                         />
                       )}
                     />

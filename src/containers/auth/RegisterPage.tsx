@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // material UI imports
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Container, Avatar, Typography } from '@material-ui/core';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import { Alert } from '@material-ui/lab';
@@ -9,7 +9,7 @@ import { Alert } from '@material-ui/lab';
 // common imports
 import CustomForm from '../../components/common/Form';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',

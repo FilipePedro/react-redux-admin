@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import {
   Grid,
   Button,
@@ -8,9 +8,12 @@ import {
 
 import { NavLink } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   submit: {
     margin: theme.spacing(2, 0, 2),
+  },
+  button: {
+    // margin: theme.spacing(1),
   },
   loader: {
     margin: theme.spacing(2, 'auto'), // '8px auto'
@@ -34,9 +37,22 @@ const ButtonArea = (props: any) => {
                   color="primary"
                   disabled={!isDirty}
                   className={classes.submit}
+                  startIcon={b.icon}
                 >
                   {b.text}
                 </Button>
+              </Grid>
+            )
+          case 'btn':
+            return (
+              <Grid item xs={12} key={i}>
+                <Button
+                  onClick={b.onClick}
+                  className={classes.button}
+                  startIcon={b.icon}
+                >
+                  Back
+              </Button>
               </Grid>
             )
           case 'navlink':

@@ -1,23 +1,26 @@
 import React from 'react';
 import clsx from 'clsx';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 // material UI imports
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import { makeStyles, Theme } from '@material-ui/core/styles';
+
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import MenuIcon from '@material-ui/icons/Menu';
-import Tooltip from '@material-ui/core/Tooltip';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Tooltip
+} from '@material-ui/core';
 
 import { logoutUser } from '../../state/auth/authActions';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -46,28 +49,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface DispatchProps {
-  logoutUser: () => void,
+interface HeaderProps {
+  open: boolean;
+  handleNavbar: (b: boolean) => void;
 }
-
-interface ownProps {
-  open: boolean,
-  handleNavbar: (b: boolean) => void,
-}
-
-type HeaderProps = DispatchProps & ownProps;
-
 // eslint-disable-next-line no-shadow
-const Header = ({ open, handleNavbar, logoutUser }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({ open, handleNavbar }: HeaderProps) => {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     handleNavbar(true);
   };
 
   const handleLogout = () => {
-    logoutUser();
+    dispatch(logoutUser());
     history.push('/login');
   };
 
@@ -102,8 +99,4 @@ const Header = ({ open, handleNavbar, logoutUser }: HeaderProps) => {
   );
 };
 
-const mapDispatchToProps = {
-  logoutUser,
-};
-
-export default connect(null, mapDispatchToProps)(Header);
+export default Header;

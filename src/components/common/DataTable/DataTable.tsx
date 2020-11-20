@@ -3,7 +3,7 @@ import React, { useEffect, useState, SyntheticEvent } from 'react';
 import { loadCSS } from 'fg-loadcss';
 
 // material UI imports
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import {
   Paper,
   TableContainer,
@@ -31,7 +31,7 @@ import {
 } from '../../../utils/utils';
 import { EnhancedTableProps, direction } from './types'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '100%',
   },
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EnhancedTable: React.FC<EnhancedTableProps> = (props: EnhancedTableProps) => {
   const {
-    rows, headerCells, deleteAction, loading, generateRandom,
+    rows, headerCells, deleteAction, loading
   } = props;
   const classes = useStyles();
 
@@ -125,7 +125,6 @@ const EnhancedTable: React.FC<EnhancedTableProps> = (props: EnhancedTableProps) 
           selected={selected}
           resetSelected={resetSelected}
           deleteAction={deleteAction}
-          generateRandom={generateRandom}
         />
         <TableContainer>
           <Table

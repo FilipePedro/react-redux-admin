@@ -8,7 +8,9 @@ import { wait } from '../utils/utils';
 
 const baseUrl = 'https://randomuser.me/api/';
 
+// id controller variable
 let idController = 0;
+const replaceBadLabels = (s: string) => s === 'Iran' ? 'Iran, Islamic Republic of' : s
 
 // helper transformer for external user api
 const userTransformer = (data: any[], idController?: number, newDate?: boolean): IUser[] =>
@@ -19,13 +21,13 @@ const userTransformer = (data: any[], idController?: number, newDate?: boolean):
       fullName: d.fullName ? d.fullName : `${d.name.first} ${d.name.last}`,
       email: d.email,
       gender: d.gender,
-      country: d.country ? d.country : { label: d.location.country, value: d.nat },
+      country: d.country ? d.country : { label: replaceBadLabels(d.location.country), value: d.nat },
       age: d.dob ? d.dob.age : d.age,
-      createdAt: !newDate ? d.registered?.date || d.createdAt : moment().toISOString(),
+      createdAt: !newDate ? d.registered?.date || d.createdAt : moment().add(i, 'seconds').toISOString(),
       picture: d.picture,
     }], []);
 
-export const fetchUsers = async (n = 20) => {
+export const fetchUsers = async (n = 1000) => {
   await wait(1000);
   const { data } = await axios.get(`${baseUrl}?results=${n}`);
 
@@ -36,11 +38,11 @@ export const fetchUsers = async (n = 20) => {
 };
 
 export const deleteUser = async (selected: number[]) => {
-  await wait(500);
+  await wait(1000);
   return selected;
 };
 
-export const getRandomUsers = async (n = 1) => {
+export const getRandomUsers = async (n = 10) => {
   await wait(250);
   const { data } = await axios.get(`${baseUrl}?results=${n}`);
 

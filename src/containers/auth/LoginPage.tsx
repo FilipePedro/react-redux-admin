@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 // material UI imports
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -12,15 +12,12 @@ import Alert from '@material-ui/lab/Alert';
 
 // common imports
 import CustomForm from '../../components/common/Form';
-import { IUser, IState } from '../../types';
-// import TextInput from '../components/common/TextInput';
+import { IState } from '../../types';
 import { loginUser } from '../../state/auth/authActions';
 import { LoginParams } from '../../state/auth/types';
 import { useHistory } from 'react-router-dom';
-// import validations from '../utils/validations';
-// import { stateInterface, User } from '../types';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',

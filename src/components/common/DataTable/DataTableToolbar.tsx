@@ -1,18 +1,17 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 // material UI imports
-import { lighten, makeStyles } from '@material-ui/core/styles';
+import { lighten, makeStyles, Theme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { Toolbar, Typography, Tooltip, Button, IconButton } from '@material-ui/core';
+import { Toolbar, Typography, Tooltip, IconButton } from '@material-ui/core';
 
 // common imports
 import { DataTableToolbarProps } from './types';
 
-const useToolbarStyles = makeStyles((theme) => ({
+const useToolbarStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
@@ -35,7 +34,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 const DataTableTooblar = (props: DataTableToolbarProps) => {
   const classes = useToolbarStyles();
   const {
-    selected, deleteAction, generateRandom, resetSelected,
+    selected, deleteAction, resetSelected,
   } = props;
 
   const numSelected = selected.length;
@@ -43,11 +42,6 @@ const DataTableTooblar = (props: DataTableToolbarProps) => {
   const handleDeleteClick = async () => {
     deleteAction(selected);
     resetSelected();
-  };
-
-  const handleGenerateRandom = (event: SyntheticEvent) => {
-    event.preventDefault();
-    generateRandom(1);
   };
 
   return (
@@ -66,17 +60,6 @@ const DataTableTooblar = (props: DataTableToolbarProps) => {
             Users
           </Typography>
         )}
-      { numSelected === 0 && (
-        <Tooltip title="Generates 10 new random Users.">
-          <Button
-            aria-label="create new user"
-            color="secondary"
-            onClick={handleGenerateRandom}
-            endIcon={<AddCircleOutlineIcon />}>
-            Generate
-          </Button>
-        </Tooltip>
-      )}
       { numSelected === 1 && (
         <>
           <Tooltip title="Edit">

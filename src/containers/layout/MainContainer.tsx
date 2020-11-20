@@ -3,19 +3,21 @@ import clsx from 'clsx';
 import { Route, Switch } from 'react-router-dom';
 
 // material UI imports
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
 // common imports
-// import CreatePage from '../pages/CreatePage';
 // import EditPage from '../pages/EditPage';
 import Header from '../../components/navigation/Header';
 import Drawer from '../../components/navigation/Drawer';
 import UsersPage from '../users/UsersPage';
+import CreatePage from '../users/CreatePage';
+import SnackBar from '../../components/common/Snackbar';
+import EditPage from '../users/EditPage';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -40,7 +42,17 @@ const useStyles = makeStyles((theme) => ({
 const MainContainer: React.FC = () => {
   const classes = useStyles();
 
+  interface alertState {
+    show: boolean,
+    type?: "success" | "info" | "warning" | "error" | undefined,
+    message?: string,
+  }
+
   const [openNavbar, setNavbar] = useState(true);
+  const [alert, setAlert] = useState<alertState | any>({})
+
+  // reset fn to pass to snackbar component
+  const resetAlert = () => setAlert({});
 
   return (
     <div className={classes.root}>
@@ -51,12 +63,37 @@ const MainContainer: React.FC = () => {
         [classes.mainContainerShift]: openNavbar,
       })}>
         <Switch>
-          <Route exact path="/" component={UsersPage} />
-          {/*  <Route path="/create" component={CreatePage} />
-          <Route exact path="/edit" component={EditPage} />
-          <Route path="/edit/:id" component={EditPage} /> */}
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <UsersPage {...props} handleAlerts={setAlert} />
+            )}
+          />
+          <Route
+            exact
+            path="/create"
+            render={(props) => (
+              <CreatePage {...props} handleAlerts={setAlert} />
+            )}
+          />
+          <Route
+            exact
+            path="/edit"
+            render={(props) => (
+              <EditPage {...props} handleAlerts={setAlert} />
+            )}
+          />
+          <Route
+            exact
+            path="/edit/:id"
+            render={(props) => (
+              <EditPage {...props} handleAlerts={setAlert} />
+            )}
+          />
         </Switch>
       </Box>
+      { Object.keys(alert).length > 0 ? <SnackBar alert={alert} reset={resetAlert} /> : <></>}
     </div>
   );
 };

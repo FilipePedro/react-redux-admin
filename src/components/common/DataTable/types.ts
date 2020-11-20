@@ -13,14 +13,12 @@ export interface EnhancedTableProps {
   rows: IUser[],
   headerCells: IHeadCells[],
   deleteAction: (selected: number[]) => void,
-  generateRandom: (n: number) => void,
   loading: boolean
 }
 
 export interface DataTableToolbarProps {
   selected: number[]
   deleteAction: (selected: number[]) => void
-  generateRandom: (n: number) => void
   resetSelected: () => void
 }
 

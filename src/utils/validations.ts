@@ -9,7 +9,7 @@ const validations = {
       message: 'Invalid email address.',
     },
   },
-  name: {
+  fullName: {
     required: {
       value: true,
       message: 'Full Name is required',
@@ -44,7 +44,7 @@ const validations = {
     },
     min: {
       value: 10,
-      message: 'Minimum age: 100',
+      message: 'Minimum age: 10',
     },
     max: {
       value: 100,
@@ -67,9 +67,9 @@ const validations = {
   },
 };
 
-export interface IValidations {
+interface IValidations {
   email: string,
-  name: string,
+  fullName: string,
   age: string,
   gender: string,
   country: string,
