@@ -1,17 +1,20 @@
 # REACT-REDUX-ADMIN
 
-Simple React Redux ADMIN APP
+# [![](https://www.tutorialswebsite.com/wp-content/uploads/react-redux.png)]()
+
+
+🖥 Start project to create simple user admin APP using React + Redux, Material UI and more. 🖥
 
 ## Features
 
  - React
  - ES6+
  - Typescript
- - Redux Hooks([Redux](https://redux.js.org/))
- - Redux-Thunk([redux-thunk](https://github.com/reduxjs/redux-thunk))
- - React Router([React Router](https://reactrouter.com/)) 
- - Testing with Jest([Jest](https://jestjs.io/)) and React Testing Library ([RTL](https://testing-library.com/docs/react-testing-library/intro/))
- - Material UI([MUI](https://material-ui.com/))
+ - Redux Hooks ([Redux](https://redux.js.org/))
+ - Redux-Thunk ([redux-thunk](https://github.com/reduxjs/redux-thunk))
+ - React Router ([React Router](https://reactrouter.com/)) 
+ - Testing with Jest ([Jest](https://jestjs.io/)) and React Testing Library ([RTL](https://testing-library.com/docs/react-testing-library/intro/))
+ - Material UI ([MUI](https://material-ui.com/))
  - API data ([RANDOM USER GENERATOR](https://randomuser.me/))
  - Uses [yarn](https://yarnpkg.com)
 
@@ -71,14 +74,15 @@ Instead, it will copy all the configuration files and the transitive dependencie
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 
-## Roadmap
+## Roadmap 🚧
+
 - [ ] Finishing Tests Examples
 - [ ] Create API to feed application with random generated data
 
-## Learn More
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Final thoughts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Feedback is always apreciated. ✌️
+- Enjoy it!! 👌
 
 ## License
 [MIT](LICENSE)
