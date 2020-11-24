@@ -3,20 +3,14 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import {
   Grid,
   Button,
-  CircularProgress
 } from '@material-ui/core';
 
 import { NavLink } from 'react-router-dom';
+import CustomSpinner from './CustomSpinner';
 
 const useStyles = makeStyles((theme: Theme) => ({
   submit: {
     margin: theme.spacing(2, 0, 2),
-  },
-  button: {
-    // margin: theme.spacing(1),
-  },
-  loader: {
-    margin: theme.spacing(2, 'auto'), // '8px auto'
   },
 }));
 
@@ -48,7 +42,6 @@ const ButtonArea = (props: any) => {
               <Grid item xs={12} key={i}>
                 <Button
                   onClick={b.onClick}
-                  className={classes.button}
                   startIcon={b.icon}
                 >
                   Back
@@ -68,13 +61,7 @@ const ButtonArea = (props: any) => {
         }
       })}
     </>
-  ) : (
-      <Grid container justify="center" spacing={2}>
-        <Grid item className={classes.loader}>
-          <CircularProgress color="secondary" />
-        </Grid>
-      </Grid>
-    )
+  ) : (<CustomSpinner />)
 };
 
 export default ButtonArea;

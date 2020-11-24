@@ -39,7 +39,7 @@ export const headCells: IHeadCells[] = [
     label: 'Age',
   },
   {
-    id: 'nat',
+    id: 'country',
     numeric: true,
     disablePadding: false,
     label: 'Nationality',

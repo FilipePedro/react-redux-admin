@@ -8,10 +8,12 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 // commom imports
 import CustomFab from '../../components/common/CustomFab';
+import SmallCard from '../../components/common/SmallCard';
 import DataTable from '../../components/common/DataTable/DataTable';
 import { IState } from '../../types';
 import { fetchUsers, generateRandom, deleteUser } from '../../state/users/userActions';
 import { headCells } from '../../utils/users-utils';
+import TestingChart from '../../components/common/Charts/TestingChart';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -23,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  spaceTop: {
+    paddingTop: theme.spacing(5),
   },
   mainContainer: {
     background: theme.palette.grey[100],
@@ -88,25 +93,142 @@ const UsersPage: React.FC<UsersPageProps> = (props: UsersPageProps) => {
     }
   };
 
+  const calcGenderPer = () => {
+    const total = users.length;
+    const male = users.filter((u) => u.gender === 'male').length
+    const female = users.filter((u) => u.gender === 'female').length
+    return {
+      male,
+      female,
+      malePer: (male / total * 100).toFixed(2),
+      femalePer: (female / total * 100).toFixed(2)
+    }
+  }
+
+  const calcAgeAverage = () => {
+    const total = users.length;
+    const averageTotal = (users.reduce((acc, u) => {
+      return acc + parseInt(u.age, 0);
+    }, 0) / total).toFixed(0);
+
+    // average male age
+    const maleUsers = users.filter((u) => u.gender === 'male')
+    const maleTotal = maleUsers.length;
+    const averageMale = (maleUsers.reduce((acc, u) => {
+      return acc + parseInt(u.age, 0);
+    }, 0) / maleTotal).toFixed(0);
+
+    // average female age
+    const femaleUsers = users.filter((u) => u.gender === 'female')
+    const femaleTotal = femaleUsers.length;
+    const averageFemale = (femaleUsers.reduce((acc, u) => {
+      return acc + parseInt(u.age, 0);
+    }, 0) / femaleTotal).toFixed(0);
+
+    return {
+      averageTotal,
+      averageMale,
+      averageFemale,
+    };
+  }
+
+  const calcCountryRep = () => {
+    const u = users.reduce((acc: any, c: any) => {
+      const alreadyExists = acc.filter((a: any) => a.value === c.country.value)[0];
+      if (alreadyExists) {
+        const newAcc = acc.filter((a: any) => a.value !== c.country.value);
+        const t = {
+          ...alreadyExists,
+          count: alreadyExists['count'] + 1
+        }
+        return [...newAcc, t];
+      }
+      return [
+        ...acc,
+        {
+          country: c.country.label,
+          value: c.country.value,
+          count: 1,
+        }
+      ]
+    }, []);
+
+    const max = u.reduce((acc, current) => {
+      if (acc[0].count > current.count) return [...acc];
+      if (acc[0].count === current.count) return [...acc, current];
+      return [current];
+    }, [{ count: 0 }]);
+
+    const calcMinValue = u.reduce((prev, current) => prev.count < current.count ? prev : current, 0).count;
+    const min = u.reduce((acc, current) => {
+      if (acc[0].count === current.count) return [...acc, current];
+      if (acc[0].count > current.count) return [current];
+      return [...acc]
+    }, [{ count: calcMinValue }]).filter((v: any) => v.country);
+
+    return {
+      max,
+      min,
+    }
+  }
+
+  const sideCards = [
+    {
+      title: 'Gender %',
+      types: 'genderPer',
+      data: calcGenderPer(),
+    },
+    {
+      title: 'Age',
+      types: 'averageAge',
+      data: calcAgeAverage(),
+    },
+    {
+      title: 'Country Representation',
+      types: 'countryRep',
+      data: calcCountryRep(),
+    }
+  ]
+
   const fabActions = [
     { icon: <GroupAddIcon />, name: 'GenerateUsers', tooltip: 'Generates 10 new random Users', onClick: handleGenerateRandom },
   ];
 
   return (
     <Container component="main" className={classes.mainContainer}>
-      <div className={classes.paper}>
-        <Grid container justify="center" spacing={2}>
-          <Grid item xs>
-            <DataTable
-              rows={users}
-              headerCells={headCells}
-              deleteAction={handleDeleteUser}
-              loading={loading}
-            />
+      <Grid container className={classes.spaceTop} spacing={2}>
+        <Grid item xs={12} md={9}>
+          <TestingChart data={users} loading={loading} />
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <Grid container>
+            {
+              sideCards.map((s, i) =>
+                (
+                  <Grid item xs={12} sm={4} md={12} key={i}>
+                    <SmallCard data={s.data} types={s.types} loading={loading} title={s.title} />
+                  </Grid>
+                )
+              )
+            }
           </Grid>
         </Grid>
-        <CustomFab actions={fabActions} />
-      </div>
+      </Grid>
+      <Grid item>
+        <div className={classes.paper}>
+          <Grid container justify="center" spacing={2}>
+            <Grid item xs>
+              <DataTable
+                rows={users}
+                headerCells={headCells}
+                deleteAction={handleDeleteUser}
+                loading={loading}
+              />
+            </Grid>
+          </Grid>
+        </div>
+      </Grid>
+      <CustomFab actions={fabActions} />
     </Container>
   );
 };

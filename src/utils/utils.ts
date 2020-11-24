@@ -33,10 +33,13 @@ const countryToFlag = (isoCode: string) => (typeof String.fromCodePoint !== 'und
 
 /* DATATABLE UTILS */
 const _descendingComparator = (a: IUser | any, b: IUser | any, orderBy: string): number => {
-  if (b[orderBy] < a[orderBy]) {
+  // if orderBy equals to country(object) use label to compare
+  const valueB = orderBy === 'country' ? b[orderBy].label : b[orderBy]
+  const valueA = orderBy === 'country' ? a[orderBy].label : a[orderBy]
+  if (valueB < valueA) {
     return -1;
   }
-  if (b[orderBy] > a[orderBy]) {
+  if (valueB > valueA) {
     return 1;
   }
   return 0;

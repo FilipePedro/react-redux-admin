@@ -17,7 +17,7 @@ const userTransformer = (data: any[], idController?: number, newDate?: boolean):
   data.reduce((acc: [], d: any, i: number) => [
     ...acc,
     {
-      id: idController || i + 1,
+      id: idController ? idController + i : i + 1,
       fullName: d.fullName ? d.fullName : `${d.name.first} ${d.name.last}`,
       email: d.email,
       gender: d.gender,
@@ -43,7 +43,7 @@ export const deleteUser = async (selected: number[]) => {
 };
 
 export const getRandomUsers = async (n = 10) => {
-  await wait(250);
+  await wait(500);
   const { data } = await axios.get(`${baseUrl}?results=${n}`);
 
   const users = userTransformer(data.results, idController + 1, true);

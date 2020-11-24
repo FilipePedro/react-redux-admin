@@ -29,9 +29,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  root: {
-    minWidth: 345,
+    height: '100vh',
   },
   large: {
     width: theme.spacing(7),
@@ -88,7 +86,7 @@ const CreatePage: React.FC<CreatePageProps> = ({ handleAlerts }: CreatePageProps
       <div className={classes.paper}>
         <Grid container justify="center" spacing={2}>
           <Grid item xs={12} xl={6} md={6} lg={5}>
-            <Card className={classes.root}>
+            <Card>
               <CardHeader
                 avatar={
                   <Avatar alt={'new_user'} src={imgSrc} className={classes.large} />

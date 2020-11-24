@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     background: theme.palette.grey[100],
-    height: '100vh',
   },
   mainContainerShift: {
     width: `calc(100% - ${drawerWidth}px)`,
