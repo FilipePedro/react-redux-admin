@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 import auth from '../../services/authService';
@@ -21,16 +20,8 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, ...rest }) => (
             state: { from: location },
           }}
         />
-        // eslint-disable-next-line indent
       ))}
   />
 );
-
-// PrivateRoute.propTypes = {
-//   children: PropTypes.oneOfType([
-//     PropTypes.object,
-//     PropTypes.array,
-//   ]),
-// };
 
 export default PrivateRoute;
