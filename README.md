@@ -13,9 +13,10 @@
  - Redux Hooks ([Redux](https://redux.js.org/))
  - Redux-Thunk ([redux-thunk](https://github.com/reduxjs/redux-thunk))
  - React Router ([React Router](https://reactrouter.com/)) 
+ - Forms with RHF ([React Hook Form](https://react-hook-form.com/))
  - Testing with Jest ([Jest](https://jestjs.io/)) and React Testing Library ([RTL](https://testing-library.com/docs/react-testing-library/intro/))
  - Material UI ([MUI](https://material-ui.com/))
- - API data ([RANDOM USER GENERATOR](https://randomuser.me/))
+ - API data ([RandomUser API](https://randomuser.me/))
  - Uses [yarn](https://yarnpkg.com)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
