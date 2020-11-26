@@ -2,22 +2,23 @@
 
 # [![](https://www.tutorialswebsite.com/wp-content/uploads/react-redux.png)]()
 
-
 🖥 Start project to create simple user admin APP using React + Redux, Material UI and more. 🖥
+
+[Live Demo](https://filipepedrojs-react-admin.netlify.app)
 
 ## Features
 
- - React
- - ES6+
- - Typescript
- - Redux Hooks ([Redux](https://redux.js.org/))
- - Redux-Thunk ([redux-thunk](https://github.com/reduxjs/redux-thunk))
- - React Router ([React Router](https://reactrouter.com/)) 
- - Forms with RHF ([React Hook Form](https://react-hook-form.com/))
- - Testing with Jest ([Jest](https://jestjs.io/)) and React Testing Library ([RTL](https://testing-library.com/docs/react-testing-library/intro/))
- - Material UI ([MUI](https://material-ui.com/))
- - API data ([RandomUser API](https://randomuser.me/))
- - Uses [yarn](https://yarnpkg.com)
+- React
+- ES6+
+- Typescript
+- Redux Hooks ([Redux](https://react-redux.js.org/api/hooks))
+- Redux-Thunk ([redux-thunk](https://github.com/reduxjs/redux-thunk))
+- React Router ([React Router](https://reactrouter.com/))
+- Forms with RHF ([React Hook Form](https://react-hook-form.com/))
+- Testing with Jest ([Jest](https://jestjs.io/)) and React Testing Library ([RTL](https://testing-library.com/docs/react-testing-library/intro/))
+- Material UI ([MUI](https://material-ui.com/))
+- API data ([RandomUser API](https://randomuser.me/))
+- Uses [yarn](https://yarnpkg.com)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -74,7 +75,6 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-
 ## Roadmap 🚧
 
 - [ ] Finishing Tests Examples
@@ -86,4 +86,5 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 - Enjoy it!! 👌
 
 ## License
+
 [MIT](LICENSE)

@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
-import { Route, Switch } from 'react-router-dom';
+import React, { useState } from "react";
+import clsx from "clsx";
+import { Route, Switch } from "react-router-dom";
 
 // material UI imports
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 
 // common imports
 // import EditPage from '../pages/EditPage';
-import Header from '../../components/navigation/Header';
-import Drawer from '../../components/navigation/Drawer';
-import UsersPage from '../users/UsersPage';
-import CreatePage from '../users/CreatePage';
-import SnackBar from '../../components/common/Snackbar';
-import EditPage from '../users/EditPage';
+import Header from "../../components/navigation/Header";
+import Drawer from "../../components/navigation/Drawer";
+import UsersPage from "../users/UsersPage";
+import CreatePage from "../users/CreatePage";
+import SnackBar from "../../components/common/Snackbar";
+import EditPage from "../users/EditPage";
 
 const drawerWidth = 240;
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
   },
   mainContainer: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   mainContainerShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -40,15 +40,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const MainContainer: React.FC = () => {
   const classes = useStyles();
-
   interface alertState {
-    show: boolean,
-    type?: "success" | "info" | "warning" | "error" | undefined,
-    message?: string,
+    show: boolean;
+    type?: "success" | "info" | "warning" | "error" | undefined;
+    message?: string;
   }
 
-  const [openNavbar, setNavbar] = useState(true);
-  const [alert, setAlert] = useState<alertState | any>({})
+  const [openNavbar, setNavbar] = useState(false);
+  const [alert, setAlert] = useState<alertState | any>({});
 
   // reset fn to pass to snackbar component
   const resetAlert = () => setAlert({});
@@ -58,16 +57,16 @@ const MainContainer: React.FC = () => {
       <Header open={openNavbar} handleNavbar={setNavbar} />
       <Drawer open={openNavbar} handleNavbar={setNavbar} />
 
-      <Box className={clsx(classes.mainContainer, {
-        [classes.mainContainerShift]: openNavbar,
-      })}>
+      <Box
+        className={clsx(classes.mainContainer, {
+          [classes.mainContainerShift]: openNavbar,
+        })}
+      >
         <Switch>
           <Route
             exact
             path="/"
-            render={(props) => (
-              <UsersPage {...props} handleAlerts={setAlert} />
-            )}
+            render={(props) => <UsersPage {...props} handleAlerts={setAlert} />}
           />
           <Route
             exact
@@ -79,20 +78,20 @@ const MainContainer: React.FC = () => {
           <Route
             exact
             path="/edit"
-            render={(props) => (
-              <EditPage {...props} handleAlerts={setAlert} />
-            )}
+            render={(props) => <EditPage {...props} handleAlerts={setAlert} />}
           />
           <Route
             exact
             path="/edit/:id"
-            render={(props) => (
-              <EditPage {...props} handleAlerts={setAlert} />
-            )}
+            render={(props) => <EditPage {...props} handleAlerts={setAlert} />}
           />
         </Switch>
       </Box>
-      { Object.keys(alert).length > 0 ? <SnackBar alert={alert} reset={resetAlert} /> : <></>}
+      {Object.keys(alert).length > 0 ? (
+        <SnackBar alert={alert} reset={resetAlert} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
